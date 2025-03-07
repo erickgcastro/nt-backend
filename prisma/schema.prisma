@@ -1,0 +1,91 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String         @id @default(uuid())
+  email           String         @unique
+  name            String
+  password        String
+  phone           String?
+  roles           String[]
+  stripeCustomerId String?
+  subscriptions   Subscription[]
+  payments        Payment[]
+  invoices        Invoice[]
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+}
+
+model Plan {
+  id              String         @id @default(uuid())
+  name            String
+  description     String
+  price           Float
+  billingInterval String
+  stripePriceId   String         @unique
+  stripeProductId String
+  features        String[]
+  subscriptions   Subscription[]
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+}
+
+model Subscription {
+  id                 String    @id @default(uuid())
+  userId             String
+  planId             String
+  stripeSubscriptionId String   @unique
+  status             String
+  currentPeriodStart DateTime
+  currentPeriodEnd   DateTime
+  canceledAt         DateTime?
+  user               User      @relation(fields: [userId], references: [id])
+  plan               Plan      @relation(fields: [planId], references: [id])
+  payments           Payment[]
+  invoices           Invoice[]
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+}
+
+model Payment {
+  id                  String        @id @default(uuid())
+  userId              String
+  stripePaymentIntentId String      @unique
+  amount              Float
+  status              String
+  description         String?
+  subscriptionId      String?
+  user                User          @relation(fields: [userId], references: [id])
+  subscription        Subscription? @relation(fields: [subscriptionId], references: [id])
+  invoices            Invoice[]
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+}
+
+model Invoice {
+  id            String       @id @default(uuid())
+  userId        String
+  paymentId     String
+  subscriptionId String
+  invoiceNumber String       @unique
+  amount        Float
+  status        String
+  issuedAt      DateTime
+  dueDate       DateTime
+  paidAt        DateTime?
+  user          User         @relation(fields: [userId], references: [id])
+  payment       Payment      @relation(fields: [paymentId], references: [id])
+  subscription  Subscription @relation(fields: [subscriptionId], references: [id])
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+}
+
