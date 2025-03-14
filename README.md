@@ -19,7 +19,9 @@ Para executar o projeto localmente em sua máquina, siga as etapas abaixo:
 
 2. Navegue até o diretório raiz do projeto;
 
-3. Inicie o projeto usando o Docker Compose:
+3. Crie um arquivo `.env` com base no arquivo `.env.example`;
+
+4. Inicie o projeto usando o Docker Compose:
 
    ```bash
    docker compose up
@@ -27,7 +29,7 @@ Para executar o projeto localmente em sua máquina, siga as etapas abaixo:
 
    Isso iniciará os contêineres necessários para executar o projeto;
 
-4. Após a inicialização, você poderá acessar a documentação da API em seu navegador através do seguinte endereço:
+5. Após a inicialização, você poderá acessar a documentação da API em seu navegador através do seguinte endereço:
 
    ```bash
    http://localhost:3000/api
