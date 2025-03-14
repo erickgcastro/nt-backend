@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import type { PlansRepository } from '../repositories/plans.repository';
-import type { StripeService } from '../../../infra/stripe/stripe.service';
-import type { CreatePlanDto } from '../dto/create-plan.dto';
-import type { PlanResponseDto } from '../dto/plan-response.dto';
+import { PlansRepository } from '../repositories/plans.repository';
+import { CreatePlanDto } from '../dto/create-plan.dto';
+import { PlanResponseDto } from '../dto/plan-response.dto';
+import { StripeService } from '@/infra/stripe/stripe.service';
 
 @Injectable()
 export class PlansService {

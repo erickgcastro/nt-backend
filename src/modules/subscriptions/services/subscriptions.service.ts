@@ -1,10 +1,10 @@
 import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
-import type { SubscriptionsRepository } from '../repositories/subscriptions.repository';
-import type { PlansService } from '../../plans/services/plans.service';
-import type { StripeService } from '../../../infra/stripe/stripe.service';
-import type { CreateSubscriptionDto } from '../dto/create-subscription.dto';
-import type { SubscriptionResponseDto } from '../dto/subscription-response.dto';
-import type { UsersRepository } from '../../auth/repositories/users.repository';
+import { SubscriptionsRepository } from '../repositories/subscriptions.repository';
+import { PlansService } from '../../plans/services/plans.service';
+import { StripeService } from '../../../infra/stripe/stripe.service';
+import { CreateSubscriptionDto } from '../dto/create-subscription.dto';
+import { SubscriptionResponseDto } from '../dto/subscription-response.dto';
+import { UsersRepository } from '../../auth/repositories/users.repository';
 
 @Injectable()
 export class SubscriptionsService {
@@ -44,7 +44,8 @@ export class SubscriptionsService {
       currentPeriodEnd: new Date(stripeSubscription.current_period_end * 1000),
     });
 
-    const clientSecret = stripeSubscription.latest_invoice?.payment_intent?.client_secret;
+    // @ts-ignore
+    const clientSecret = stripeSubscription.latest_invoice.payment_intent.client_secret;
 
     return {
       ...subscription,

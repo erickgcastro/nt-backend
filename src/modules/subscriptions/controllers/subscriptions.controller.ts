@@ -1,8 +1,8 @@
 import { Controller, Post, Get, Delete, Body, Param, UseGuards, Request } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../../../common/guards/jwt-auth.guard';
-import type { SubscriptionsService } from '../services/subscriptions.service';
-import type { CreateSubscriptionDto } from '../dto/create-subscription.dto';
+import { SubscriptionsService } from '../services/subscriptions.service';
+import { CreateSubscriptionDto } from '../dto/create-subscription.dto';
 import { SubscriptionResponseDto } from '../dto/subscription-response.dto';
 
 @ApiTags('subscriptions')

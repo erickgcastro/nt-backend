@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
-import type { PaymentsRepository } from '../repositories/payments.repository';
-import type { StripeService } from '../../../infra/stripe/stripe.service';
-import type { CreatePaymentDto } from '../dto/create-payment.dto';
-import type { PaymentResponseDto } from '../dto/payment-response.dto';
-import type { SubscriptionsService } from '../../subscriptions/services/subscriptions.service';
+import { PaymentsRepository } from '../repositories/payments.repository';
+import { StripeService } from '../../../infra/stripe/stripe.service';
+import { CreatePaymentDto } from '../dto/create-payment.dto';
+import { PaymentResponseDto } from '../dto/payment-response.dto';
+import { SubscriptionsService } from '../../subscriptions/services/subscriptions.service';
 
 @Injectable()
 export class PaymentsService {
@@ -45,6 +45,8 @@ export class PaymentsService {
 
     return {
       ...payment,
+      description: payment.description || undefined,
+      subscriptionId: payment.subscriptionId || undefined,
       clientSecret: paymentIntent.client_secret || undefined,
     };
   }
@@ -67,7 +69,12 @@ export class PaymentsService {
       payment.status = paymentIntent.status;
     }
 
-    return payment;
+    return {
+      ...payment,
+      description: payment.description || undefined,
+      subscriptionId: payment.subscriptionId || undefined,
+      clientSecret: paymentIntent.client_secret || undefined,
+    };
   }
 
   async handleStripeWebhook(payload: Buffer, signature: string): Promise<void> {

@@ -4,8 +4,8 @@ import { JwtAuthGuard } from '../../../common/guards/jwt-auth.guard';
 import { RolesGuard } from '../../../common/guards/roles.guard';
 import { Roles } from '../../../common/decorators/roles.decorator';
 import { Role } from '../../../common/enums/role.enum';
-import type { PlansService } from '../services/plans.service';
-import type { CreatePlanDto } from '../dto/create-plan.dto';
+import { PlansService } from '../services/plans.service';
+import { CreatePlanDto } from '../dto/create-plan.dto';
 import { PlanResponseDto } from '../dto/plan-response.dto';
 
 @ApiTags('plans')

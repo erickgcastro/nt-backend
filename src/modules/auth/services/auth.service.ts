@@ -1,11 +1,11 @@
 import { Injectable, UnauthorizedException, ConflictException } from '@nestjs/common';
-import type { JwtService } from '@nestjs/jwt';
+import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import type { UsersRepository } from '../repositories/users.repository';
-import type { RegisterDto } from '../dto/register.dto';
-import type { LoginDto } from '../dto/login.dto';
-import type { AuthResponseDto } from '../dto/auth-response.dto';
-import type { StripeService } from '../../../infra/stripe/stripe.service';
+import { UsersRepository } from '../repositories/users.repository';
+import { RegisterDto } from '../dto/register.dto';
+import { LoginDto } from '../dto/login.dto';
+import { AuthResponseDto } from '../dto/auth-response.dto';
+import { StripeService } from '../../../infra/stripe/stripe.service';
 import { User } from '@prisma/client';
 
 @Injectable()

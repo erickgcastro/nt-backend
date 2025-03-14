@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import type { PrismaService } from '../../../infra/database/prisma.service';
-import type { User } from '../entities/user.entity';
-import type { RegisterDto } from '../dto/register.dto';
+import { PrismaService } from '../../../infra/database/prisma.service';
+import { RegisterDto } from '../dto/register.dto';
 import * as bcrypt from 'bcrypt';
 import { Role } from '../../../common/enums/role.enum';
+import { User } from '@prisma/client';
 
 @Injectable()
 export class UsersRepository {

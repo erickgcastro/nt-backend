@@ -1,20 +1,11 @@
-import {
-  Controller,
-  Post,
-  Get,
-  Body,
-  Param,
-  UseGuards,
-  Request,
-  type RawBodyRequest,
-  Req,
-} from '@nestjs/common';
+import { Controller, Post, Get, Body, Param, UseGuards, RawBodyRequest, Req } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../../../common/guards/jwt-auth.guard';
-import type { PaymentsService } from '../services/payments.service';
-import type { CreatePaymentDto } from '../dto/create-payment.dto';
+import { PaymentsService } from '../services/payments.service';
+import { CreatePaymentDto } from '../dto/create-payment.dto';
 import { PaymentResponseDto } from '../dto/payment-response.dto';
-import { Request, Request } from 'express';
+import { Request } from 'express';
+import { User } from '@prisma/client';
 
 @ApiTags('payments')
 @Controller('payments')
@@ -32,7 +23,7 @@ export class PaymentsController {
   })
   async create(
     @Body() createPaymentDto: CreatePaymentDto,
-    @Request() req: Request,
+    @Req() req: Request & { user: User },
   ): Promise<PaymentResponseDto> {
     return this.paymentsService.createPaymentIntent(createPaymentDto, req.user.id);
   }
@@ -47,7 +38,10 @@ export class PaymentsController {
     type: PaymentResponseDto,
   })
   @ApiResponse({ status: 404, description: 'Payment not found' })
-  async findOne(@Param('id') id: string, @Request() req: Request): Promise<PaymentResponseDto> {
+  async findOne(
+    @Param('id') id: string,
+    @Req() req: Request & { user: User },
+  ): Promise<PaymentResponseDto> {
     return this.paymentsService.getPaymentStatus(id, req.user.id);
   }
 
@@ -57,7 +51,7 @@ export class PaymentsController {
   async handleStripeWebhook(
     @Req() request: RawBodyRequest<Request>,
   ): Promise<{ received: boolean }> {
-    const signature = request.headers.get('stripe-signature') as string;
+    const signature = request.headers['stripe-signature'] as string;
     await this.paymentsService.handleStripeWebhook(request.rawBody!, signature);
     return { received: true };
   }

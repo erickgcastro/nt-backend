@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import type { PrismaService } from '../../../infra/database/prisma.service';
+import { PrismaService } from '../../../infra/database/prisma.service';
 import type { Plan } from '../entities/plan.entity';
-import type { CreatePlanDto } from '../dto/create-plan.dto';
+import { CreatePlanDto } from '../dto/create-plan.dto';
 
 @Injectable()
 export class PlansRepository {

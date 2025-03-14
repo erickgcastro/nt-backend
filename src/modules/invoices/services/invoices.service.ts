@@ -1,10 +1,10 @@
 import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
-import type { InvoicesRepository } from '../repositories/invoices.repository';
-import type { EmailService } from '../../../infra/email/email.service';
-import type { InvoiceResponseDto } from '../dto/invoice-response.dto';
+import { InvoicesRepository } from '../repositories/invoices.repository';
+import { EmailService } from '../../../infra/email/email.service';
+import { InvoiceResponseDto } from '../dto/invoice-response.dto';
 import { generateInvoicePdf } from '../utils/invoice-generator';
 import type { Invoice } from '../entities/invoice.entity';
-import type { PrismaService } from '../../../infra/database/prisma.service';
+import { PrismaService } from '../../../infra/database/prisma.service';
 
 @Injectable()
 export class InvoicesService {

@@ -5,6 +5,7 @@ import { AuthController } from './controllers/auth.controller';
 import { AuthService } from './services/auth.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { UsersRepository } from './repositories/users.repository';
+import { StripeModule } from '@/infra/stripe/stripe.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { UsersRepository } from './repositories/users.repository';
         signOptions: { expiresIn: '1d' },
       }),
     }),
+    StripeModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, JwtStrategy, UsersRepository],

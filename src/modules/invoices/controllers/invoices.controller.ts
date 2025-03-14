@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBearerAuth } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../../../common/guards/jwt-auth.guard';
-import type { InvoicesService } from '../services/invoices.service';
+import { InvoicesService } from '../services/invoices.service';
 import { InvoiceResponseDto } from '../dto/invoice-response.dto';
 
 @ApiTags('invoices')

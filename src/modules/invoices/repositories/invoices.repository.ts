@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import type { PrismaService } from '../../../infra/database/prisma.service';
 import type { Invoice } from '../entities/invoice.entity';
+import { PrismaService } from '@/infra/database/prisma.service';
 
 @Injectable()
 export class InvoicesRepository {

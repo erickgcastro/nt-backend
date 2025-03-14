@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import type { PrismaService } from '../../../infra/database/prisma.service';
-import type { Subscription } from '../entities/subscription.entity';
+import { PrismaService } from '../../../infra/database/prisma.service';
+import { Subscription } from '../entities/subscription.entity';
 
 @Injectable()
 export class SubscriptionsRepository {
