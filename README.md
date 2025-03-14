@@ -11,7 +11,7 @@ Para executar o projeto localmente em sua máquina, siga as etapas abaixo:
 
 ### Passos
 
-1. Clone o repositório do projeto para o seu ambiente de desenvolvimento:
+1. Clone o repositório do projeto:
 
    ```bash
    git clone <repository-url>
